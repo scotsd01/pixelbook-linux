@@ -9,6 +9,8 @@
       - python
       - python3
       - pkg-config
+      - gcc-8
+      - git
 
       # Needed for mounting recovery image
       - kpartx
@@ -23,5 +25,15 @@
       - libspeex-dev
       - libspeexdsp-dev
       - libasound2-dev
-    state: latest 
 
+    state: latest 
+- name: Create /etc/libinput directory if it does not exist
+  file:
+    path: /etc/libinput
+    state: directory
+    mode: '0755'
+    ignore_errors: true
+
+- name: Change default compile to use gcc-8
+  command: update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 800 --slave /usr/bin/g++ g++ /usr/bin/g++-8
+  ignore_errors: true
