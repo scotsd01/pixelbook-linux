@@ -32,8 +32,8 @@
     path: /etc/libinput
     state: directory
     mode: '0755'
-    ignore_errors: true
 
 - name: Change default compile to use gcc-8
-  command: update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 800 --slave /usr/bin/g++ g++ /usr/bin/g++-8
-  ignore_errors: true
+  become: true
+  command:
+    cmd: update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 800 --slave /usr/bin/g++ g++ /usr/bin/g++-8
